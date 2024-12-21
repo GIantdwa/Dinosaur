@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dinosaurs Showcase</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: left;
+      background-image: url('https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmZsc2h5aDRzMzQ0OGRjM3ltOWJobnN1cDQ3Z3pid2I0Z3dwcnA2diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/mjW8ytWgjLS1O/giphy.webp');
+      background-size: auto;
+      background-color: #000000;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      margin-left: 10px;  
+      padding: 20px;
+      background-color: #ffe4c4b9;
+      border-radius: 10px;
+      width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      background-color: #e20938;
+      color: white;
+      border-radius: 5px; 
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #b84c51;
+    }
+    .dinosaur {
+      margin-top: 50px;
+      color: #333;
+    }
+    img {
+      margin-bottom: 100px;
+      max-width: 150%;
+      border-radius: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Dinosaurs Showcase</h1>
+    <button onclick="generateDinosaur()">ROAR</button>
+    <div class="dinosaur" id="dinosaurContainer">
+      
+    </div>
+  </div>
+  <script>
+    const dinosaurs = [
+      { 
+        name: "Tyrannosaurus Rex", 
+        img: "https://media.cnn.com/api/v1/images/stellar/prod/nm-tyrannosaur-sergey-krasovskiy-full.jpg?c=original", 
+        description: "The Tyrannosaurus Rex, often abbreviated as T. rex, was a carnivorous dinosaur that lived about 68 to 66 million years ago. It was one of the largest land carnivores, with a massive skull and powerful jaws."
+      },
+      { 
+        name: "Velociraptor", 
+        img: "https://dinosaurland.es/wp-content/uploads/2024/02/21-Velociraptor.jpeg", 
+        description: "Velociraptor was a small but fierce dinosaur known for its agility and intelligence. It lived during the Late Cretaceous period, approximately 75 to 71 million years ago."
+      },
+      { 
+        name: "Triceratops", 
+        img: "https://www.dinosaur.org/wp-content/uploads/2023/02/a-lone-Triceratops-drinks-from-a-crystal-clear-lake-at-dawn-1024x574.png", 
+        description: "Triceratops was a herbivorous dinosaur that lived around 68 to 66 million years ago. It is characterized by its large frill and three distinct facial horns."
+      },
+      { 
+        name: "Brachiosaurus", 
+        img: "https://a-z-animals.com/media/2022/05/Brachiosaurus.jpg", 
+        description: "Brachiosaurus was a massive herbivorous dinosaur from the Jurassic period. Its long neck allowed it to reach high vegetation, making it one of the tallest dinosaurs."
+      },
+      { 
+        name: "Stegosaurus", 
+        img: "https://dinosaurland.es/wp-content/uploads/elementor/thumbs/02-Stegosaurus-qm41rsssrvucjnhzs27cnkxsajz3zomvf8vsbv3ri8.jpeg", 
+        description: "Stegosaurus is known for its distinctive double row of large, bony plates along its back and spiked tail. It lived during the Late Jurassic period about 155 to 150 million years ago."
+      },
+      { 
+        name: "Spinosaurus", 
+        img: "https://dinosaurland.es/wp-content/uploads/2024/02/12-Spinosaurus.jpeg", 
+        description: "Spinosaurus was one of the largest carnivorous dinosaurs, famous for its sail-like structure on its back. It lived in the Cretaceous period and is believed to have been a semi-aquatic dinosaur."
+      },
+      { 
+        name: "Ankylosaurus", 
+        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGnQHlW_7ufn3D-qI_nNao6Em-fPCpFm83jw&s", 
+        description: "Ankylosaurus was a heavily armored herbivorous dinosaur from the Late Cretaceous period. It had a club-like tail for defense against predators."
+      },
+      { 
+        name: "Allosaurus", 
+        img: "https://dinosaurland.es/wp-content/uploads/2024/02/03-Allosaurus.jpg", 
+        description: "Allosaurus was a large theropod dinosaur that lived during the Late Jurassic period. It was one of the top predators of its time."
+      },
+      { 
+        name: "Iguanodon", 
+        img: "https://science-resources.co.uk/KS2/Dinosaurs/I/Iguanodon.jpg", 
+        description: "Iguanodon was one of the first dinosaurs to be named and lived during the Early Cretaceous period. It was an herbivore with distinctive thumb spikes."
+      },
+      { 
+        name: "Pterodactyl", 
+        img: "https://i0.wp.com/onlydinosaurs.com/wp-content/uploads/2021/12/A-Pterodactyl-is-flying-across-the-mountain-with-a-fish-in-its-mouth.jpg", 
+        description: "Pterodactyls were flying reptiles, not dinosaurs, but they lived alongside dinosaurs. They had large wingspans and were often found near water."
+      },
+      { 
+        name: "Diplodocus", 
+        img: "https://easy-peasy.ai/cdn-cgi/image/quality=80,format=auto,width=700/https://fdczvxmwwjwpwbeeqcth.supabase.co/storage/v1/object/public/images/4de27af8-da46-4447-bcd7-694ec4baebfc/6dabd2a1-ae09-4da1-bb9a-8f21b31d9b6e.png", 
+        description: "Diplodocus was a long-necked herbivore that lived during the Late Jurassic period. It is known for its distinctive long tail and neck, which helped it feed from high tree branches."
+      },
+      { 
+        name: "Carnotaurus", 
+        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlaHLew7K_SK-79htzXpe7enW9m-Tq0Rx2PA&s", 
+        description: "Carnotaurus was a theropod dinosaur with distinctive bull-like horns above its eyes. It was a fast predator from the Late Cretaceous period."
+      },
+      { 
+        name: "Parasaurolophus", 
+        img: "https://static.wikia.nocookie.net/jurassicworld-evolution/images/c/cf/Jurassic_World_Evolution_Screenshot_2020.01.08_-_21.06.32.21.png/revision/latest/scale-to-width/360?cb=20200120120641", 
+        description: "Parasaurolophus was a herbivorous dinosaur known for its long, backward-curving crest on its head, used for communication and possibly mating displays."
+      },
+      { 
+        name: "Pachycephalosaurus", 
+        img: "https://a-z-animals.com/media/2022/04/shutterstock_1262139349-1024x639.jpg", 
+        description: "Pachycephalosaurus is known for its thick, bony dome on its skull, which it likely used for headbutting. It lived during the Late Cretaceous period."
+      },
+      { 
+        name: "Gigantosaurus", 
+        img: "https://t4.ftcdn.net/jpg/05/98/17/03/360_F_598170393_oInuUEjW5mcTld1SkJIL99V0YVANSxjr.jpg", 
+        description: "Gigantosaurus was one of the largest predatory dinosaurs, rivaling the Tyrannosaurus Rex in size. It lived during the Late Cretaceous period."
+      },
+      { 
+        name: "Therizinosaurus", 
+        img: "https://static1.srcdn.com/wordpress/wp-content/uploads/2022/08/Therizinosaurus-in-Jurassic-World-Dominion.jpg", 
+        description: "Therizinosaurus was a theropod dinosaur with incredibly long claws, which could reach lengths of over 3 feet. It was herbivorous despite its predatory appearance."
+      },
+      { 
+        name: "Coelophysis", 
+        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxR20nnW53lt5vEPsvLr75Kny37J1uxng4Lg&s", 
+        description: "Coelophysis was one of the earliest known theropods, living during the Late Triassic period. It was a small, lightweight carnivore."
+      },
+      { 
+        name: "Microraptor", 
+        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSADJdUu5APj16JgjHeeXfD05k75Kf_bAHhTg&s", 
+        description: "Microraptor was a small, feathered dinosaur known for its four wings. It lived during the Early Cretaceous period and is considered one of the smallest dinosaurs."
+      },
+      { 
+        name: "Mosasaurus", 
+        img: "https://scitechdaily.com/images/Mosasaurus-Concept.jpg", 
+        description: "Mosasaurus was a marine reptile from the Late Cretaceous period, not a true dinosaur. It was an apex predator in the seas."
+      },
+      { 
+        name: "Compsognathus", 
+        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtu-xyRZZi1YGf0-AnQBQ5A_FiWVHBFjiicQ&s", 
+        description: "Compsognathus was a small, agile carnivorous dinosaur from the Late Jurassic period. It was one of the fastest dinosaurs of its time."
+      }
+    ];
+
+    function generateDinosaur() {
+      const randomIndex = Math.floor(Math.random() * dinosaurs.length);
+      const randomDinosaur = dinosaurs[randomIndex];
+
+      const dinosaurContainer = document.getElementById('dinosaurContainer');
+      dinosaurContainer.innerHTML = ''; 
+
+      const dinosaurName = document.createElement('p');
+      dinosaurName.textContent = randomDinosaur.name;
+
+      const dinosaurDescription = document.createElement('p');
+      dinosaurDescription.textContent = randomDinosaur.description;
+
+      const dinosaurImage = document.createElement('img');
+      dinosaurImage.src = randomDinosaur.img;
+      dinosaurImage.alt = randomDinosaur.name;
+
+      dinosaurContainer.appendChild(dinosaurName);
+      dinosaurContainer.appendChild(dinosaurDescription);
+      dinosaurContainer.appendChild(dinosaurImage);
+    }
+  </script>
+</body>
+</html>
